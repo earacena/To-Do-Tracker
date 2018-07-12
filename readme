@@ -4,6 +4,9 @@ Project title:
 Version:
 	0.01
 
+Language, libraries, frameworks:
+	C
+
 Project Description:
 	Basic productivity tool that keeps a "to-do" list with 
 	several QoL (quality of life) features.
