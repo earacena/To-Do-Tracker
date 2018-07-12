@@ -1,0 +1,23 @@
+Project title:
+	To-do Tracker
+
+Version:
+	0.01
+
+Project Description:
+	Basic productivity tool that keeps a "to-do" list with 
+	several QoL (quality of life) features.
+		Features:
+			Adding tasks
+			Removing tasks
+			Keeping track of completed tasks
+			Saving to-do list
+			Loading saved to-do list
+			Reseting current list
+			View current list
+
+Author:
+	Emanuel Aracena
+
+License:
+	<INSERT LICENSE HERE>
