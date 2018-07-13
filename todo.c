@@ -3,7 +3,7 @@
 */
 
 /*
-	Program description
+	File description
 */
 #include<stdio.h>
 #include<inttypes.h>
@@ -11,57 +11,49 @@
 #define MAX_TASKS 50
 #define MAX_TASK_LENGTH 80
 
-struct List {
-	uint8_t task[MAX_TASKS][MAX_TASK_LENGTH];
-	uint8_t completed[MAX_TASKS];
-}list;
+typedef struct List {
+	
+};
 
 void print_menu()
 {
 	printf("\nTo-do Tracker v0.01\n___________________\n");
-	printf("1. Add task\n");
-	printf("2. Remove task\n");
-	printf("3. Mark task as completed\n");
-	printf("4. Save list\n");
-	printf("5. Load list\n");
-	printf("6. Reset list\n");
-	printf("7. View current list\n");
 	printf("0. Quit");
 	printf("\n\nChoice?: ");
 }
 
-void add_task()
+void add_task(uint8_t *task_array)
+{
+
+}
+
+void remove_task(uint8_t *task_array[][], uint8_t *position)
+{
+
+}
+
+void mark_task_complete(uint8_t *task_array[][], uint8_t *position)
 {
 	printf("Feature not added yet.");
 }
 
-void remove_task()
-{
-	printf("Feature not added yet.");
-}
-
-void mark_task_complete()
-{
-	printf("Feature not added yet.");
-}
-
-void save_list()
+void save_list(List list)
 {
 
 	printf("Feature not added yet.");
 }
 
-void load_list()
+void load_list(List* list)
 {
 	printf("Feature not added yet.");
 }
 
-void reset_list()
+void reset_list(List* list)
 {	
 	printf("Feature not added yet.");
 }
 
-void display_list()
+void display_list(List list)
 {
 	printf("Feature not added yet.");
 }
@@ -75,29 +67,15 @@ uint8_t read_input()
 
 int main()
 {
+	List list;
+
 	print_menu();
 	uint8_t choice = read_input();
 
 	while(choice > 0) {
 		switch(choice) {
 			case 1:
-				add_task();
-				break;
-			case 2:
-				remove_task();
-				break;
-			case 3:
-				mark_task_complete();
-				break;
-			case 4:
-				save_list();
-				break;
-			case 5:
-				load_list();
-				break;
-			case 6:
-				reset_list();
-				break;
+				
 			default:
 				printf("ERROR: Invalid input, please try again.\n");
 				break;
