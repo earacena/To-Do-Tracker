@@ -27,6 +27,7 @@ void print_menu()
 	printf("\nTo-do Tracker v0.01\n___________________\n");
 	printf("1. Add task\n");
 	printf("2. Display list\n");
+	printf("3. Remove task\n");
 	printf("0. Quit\n");
 	printf("\n\nChoice?: ");
 }
@@ -48,11 +49,37 @@ void add_task(List **list_ref)
 		
 		current->next = new_task;
 	}
+
 }
 
-void remove_task()
-{
-	printf("\n\nFeature not added yet.\n\n");
+void remove_task(List **list_ref)
+{	
+
+	if (*list_ref == NULL) 
+		printf("\nERR: No items on list!\n");
+	else {
+
+		printf("\n\nDELETE TASK(#): ");
+		uint8_t remove_pos;
+		scanf("%" PRId8, &remove_pos);
+
+		List* current = *list_ref;
+
+		if (remove_pos == 1)
+			*list_ref = current->next;
+		else {
+			uint8_t position = 1;
+			List* current = *list_ref;
+			while (remove_pos > position+1) {
+				current = current->next;
+				list_ref = &current->next;
+				++position;
+			}
+			*list_ref = current->next;
+			free(current);
+		}
+	}
+
 }
 
 void mark_task_complete()
@@ -82,8 +109,10 @@ void display_list(List **list_ref)
 	uint8_t position = 1;
 
 	List *current = *list_ref;
-	if (current == NULL)
-		printf("No items added to the list!\n");
+	if (current == NULL) {
+		printf("\nERR: No items added to the list!\n");
+		return;
+	}
 	else
 		while(current != NULL) {
 			printf("%" PRId8 ". %s\n", position, 
@@ -115,6 +144,9 @@ int main()
 			break;
 		case 2:
 			display_list(&list);
+			break;
+		case 3:
+			remove_task(&list);
 			break;
 		default:
 			printf("ERROR: Invalid input, please try again.\n");
