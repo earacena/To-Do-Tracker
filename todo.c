@@ -28,8 +28,7 @@ void print_menu()
 	printf("1. Add task\n");
 	printf("2. Display list\n");
 	printf("3. Remove task\n");
-	printf("4. Clear list\n");
-	printf("5. Mark task complete\n");
+	printf("4. Mark task complete\n");
 	printf("0. Quit\n");
 	printf("\n\nChoice?: ");
 }
@@ -88,17 +87,17 @@ void remove_task(List **list_ref)
 
 void mark_task_complete(List **list_ref)
 {
-	printf("MARK COMPLETE (#): ");
-	uint8_t position = 1;
-	scanf("%" SCNd8 "%*c", &position);
-
 	List *current = *list_ref;
 	if (current == NULL)
 		printf("\nERR: No items added to the list!\n");
 	else {
-		uint8_t counter = 1;
-		while(position > counter) {
+		printf("MARK COMPLETE (#): ");
+		uint8_t mark_pos;
+		scanf("%" SCNd8 "%*c", &mark_pos);
+		uint8_t position = 1;
+		while(mark_pos > position) {
 			current = current->next;
+			++position;
 		}
 		current->completed = 1;
 	}
@@ -129,6 +128,8 @@ void display_list(List **list_ref)
 		printf("\n\nCURRENT LIST\n____________\n\n");
 		uint8_t position = 1;
 		while(current != NULL) {
+			if (current->completed == 1)
+				printf("[COMPLETED] ");
 			printf("%" PRId8 ". %s\n", position, current->task_desc);
 			
 			current = current->next;
