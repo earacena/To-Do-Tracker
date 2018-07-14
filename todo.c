@@ -28,6 +28,8 @@ void print_menu()
 	printf("1. Add task\n");
 	printf("2. Display list\n");
 	printf("3. Remove task\n");
+	printf("4. Clear list\n");
+	printf("5. Mark task complete\n");
 	printf("0. Quit\n");
 	printf("\n\nChoice?: ");
 }
@@ -35,11 +37,12 @@ void print_menu()
 void add_task(List **list_ref)
 {
 	List *current = *list_ref;
-	List *new_task =  malloc(sizeof(List));
+	List *new_task = malloc(sizeof(List));
 
 	printf("\n\nNEW TASK: ");
 	fgets(new_task->task_desc, MAX_TASK_LENGTH, stdin);
 	new_task->completed = 0;
+	new_task->next = NULL;
 
 	if (current == NULL) 
 		*list_ref = new_task;
@@ -69,58 +72,69 @@ void remove_task(List **list_ref)
 			*list_ref = current->next;
 		else {
 			uint8_t position = 1;
-			List* current = *list_ref;
 			while (remove_pos > position+1) {
 				current = current->next;
 				list_ref = &current->next;
 				++position;
 			}
-			*list_ref = current->next;
-			free(current);
+				current = current->next;
+				*list_ref = current->next;
+
+				free(current);
 		}
 	}
 
 }
 
-void mark_task_complete()
+void mark_task_complete(List **list_ref)
+{
+	printf("MARK COMPLETE (#): ");
+	uint8_t position = 1;
+	scanf("%" SCNd8 "%*c", &position);
+
+	List *current = *list_ref;
+	if (current == NULL)
+		printf("\nERR: No items added to the list!\n");
+	else {
+		uint8_t counter = 1;
+		while(position > counter) {
+			current = current->next;
+		}
+		current->completed = 1;
+	}
+}
+
+void save_list()
+{
+
+	printf("\n\nFeature not added yet.\n\n");
+}
+
+void load_list()
 {
 	printf("\n\nFeature not added yet.\n\n");
 }
 
-void save_head()
-{
-
-	printf("\n\nFeature not added yet.\n\n");
-}
-
-void load_head()
-{
-	printf("\n\nFeature not added yet.\n\n");
-}
-
-void reset_head()
+void clear_list()
 {	
 	printf("\n\nFeature not added yet.\n\n");
 }
 
 void display_list(List **list_ref)
 {
-	printf("\n\nCURRENT LIST\n____________\n\n");
-	uint8_t position = 1;
-
 	List *current = *list_ref;
-	if (current == NULL) {
+	if (current == NULL) 
 		printf("\nERR: No items added to the list!\n");
-		return;
-	}
-	else
+	else {
+		printf("\n\nCURRENT LIST\n____________\n\n");
+		uint8_t position = 1;
 		while(current != NULL) {
-			printf("%" PRId8 ". %s\n", position, 
-				current->task_desc);
+			printf("%" PRId8 ". %s\n", position, current->task_desc);
 			
 			current = current->next;
 			++position;
 		}
+	}
 }
 
 uint8_t read_choice()
@@ -147,6 +161,9 @@ int main()
 			break;
 		case 3:
 			remove_task(&list);
+			break;
+		case 4:
+			mark_task_complete(&list);
 			break;
 		default:
 			printf("ERROR: Invalid input, please try again.\n");
