@@ -26,7 +26,7 @@ struct List {
 
 void print_menu()
 {
-	printf("\nTo-do Tracker v0.01\n___________________\n");
+	printf("\nTo-do Tracker v0.10\n___________________\n");
 	printf("1. Add task\n");
 	printf("2. Display list\n");
 	printf("3. Remove task\n");
