@@ -1,9 +1,9 @@
 /*
-	License goes here
-*/
-
-/*
 	todo.c 
+	
+	Author: 	Emanuel Aracena
+	Description:	A simple to-do list tracker command-line utility.
+	
 */
 #include<stdio.h>
 #include<stdlib.h>
